@@ -61,7 +61,7 @@
           </div>
           <div class="form-group">
             <label>Book stores</label>
-            <select name="bookStore" class="form-control">
+            <select name="bookStores" class="form-control">
               <option th:if="${book} != null"
                       th:selected="${book.getBookStore() != null && book.getBookStore().getId() == str.getId()}"
                       th:each="str : ${bookStores}"

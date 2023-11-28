@@ -50,7 +50,7 @@ public class BookController {
 
     @GetMapping("/edit-form/{id}")
     public String editBook(@PathVariable(required = false) Long id, Model model){
-       Optional<Book> book = this.bookService.findBookById(id);
+       Book book = this.bookService.findBookById(id).get();
        List<BookStore> bookStores = this.bookStoreService.findAll();
        model.addAttribute("book", book);
        model.addAttribute("bookStores", bookStores);
@@ -70,8 +70,8 @@ public class BookController {
                           @RequestParam String isbn,
                           @RequestParam String genre,
                           @RequestParam int year,
-                          @RequestParam Long bookStore){
-        this.bookService.save(id, title, isbn, genre, year, bookStore);
+                          @RequestParam Long bookStores){
+        this.bookService.save(id, title, isbn, genre, year, bookStores);
         return "redirect:/books";
     }
 }

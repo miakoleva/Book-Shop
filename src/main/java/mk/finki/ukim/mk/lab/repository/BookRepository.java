@@ -42,7 +42,7 @@ public class BookRepository {
         Optional<Book> book = findById(id);
         if(book.isPresent()){
         Book editedBook = new Book(isbn, title, genre, year, book.get().getAuthors(), bookStore);
-        DataHolder.books.remove(book);
+        DataHolder.books.remove(book.get());
         DataHolder.books.add(editedBook);
         return Optional.of(editedBook);
         }else {
