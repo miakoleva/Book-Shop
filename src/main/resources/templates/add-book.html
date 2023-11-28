@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+
+  <title>Welcome to the editing page</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <form action="/books/add-book" method="POST">
+          <input id="id" type="hidden" name="id"
+                 th:value="(${book} != null ? ${book.getId()} : '')">
+          <div class="form-group">
+            <label for="title">Book title</label>
+            <input type="text"
+                   class="form-control"
+                   id="title"
+                   name="title"
+                   th:value="(${book} != null ? ${book.getTitle()} : '')"
+                   required
+                   placeholder="Enter book title">
+          </div>
+          <div class="form-group">
+            <label for="isbn">Isbn</label>
+            <input type="text"
+                   class="form-control"
+                   id="isbn"
+                   name="isbn"
+                   th:value="(${book} != null ? ${book.getIsbn()} : '')"
+                   placeholder="Isbn">
+          </div>
+          <div class="form-group">
+            <label for="genre">Genre</label>
+            <input type="text"
+                   class="form-control"
+                   id="genre"
+                   name="genre"
+                   th:value="(${book} != null ? ${book.getGenre()} : '')"
+                   placeholder="Genre">
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number"
+                   class="form-control"
+                   id="year"
+                   name="year"
+                   th:value="(${book} != null ? ${book.getYear()} : '')"
+                   placeholder="Year">
+          </div>
+          <div class="form-group">
+            <label>Book stores</label>
+            <select name="bookStore" class="form-control">
+              <option th:if="${book} != null"
+                      th:selected="${book.getBookStore() != null && book.getBookStore().getId() == str.getId()}"
+                      th:each="str : ${bookStores}"
+                      th:value="${str.getId()}"
+                      th:text="${str.getName()}">
+              </option>
+              <option th:if="${book} == null"
+                      th:each="str : ${bookStores}"
+                      th:value="${str.getId()}"
+                      th:text="${str.getName()}">
+              </option>
+            </select>
+          </div>
+
+
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+          <a type="button" class="btn btn-primary" href="/books">Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

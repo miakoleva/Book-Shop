@@ -9,4 +9,5 @@ public interface AuthorService{
     Author findById(Long id);
 
     List<Author> filterExistingAuthors(List<Author> existing);
+
 }

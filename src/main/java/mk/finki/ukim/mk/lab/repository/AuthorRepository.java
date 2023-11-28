@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab.model.Author;
+import mk.finki.ukim.mk.lab.model.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,6 @@ public class AuthorRepository {
     public Optional<Author> findById(Long id){
         return DataHolder.authors.stream().filter(a -> a.getId().equals(id)).findFirst();
     }
+
 
 }

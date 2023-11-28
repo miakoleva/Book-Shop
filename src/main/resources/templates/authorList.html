@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Add new Author to Book</title>
-  <style type = "text/css">
-    body {
-      width: 800px;
-      margin: auto;
-    }
-    table {
-      width:100%;
-    }
-    table, td, th {
-      border: 1px solid black;
-      padding:3px 2px;
-    }
-    section {
-      float: left;
-      margin: 0 1.5%;
-      width: 63%;
-    }
-    aside {
-      float: right;
-      margin: 0 1.5%;
-      width: 30%;
-    }
-  </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <title>Add new Author to Book</title>
+
 </head>
 <body>
 <header>
-  <h1>Select the Author to add to the Book </h1>
+    <h1>Select the Author to add to the Book </h1>
 </header>
-<form th:method="POST" th:action="@{/author}">
 <section>
-  <h2>Select author:</h2>
 
-  <div th:each="author: ${authors}">
-    <input type="radio" th:value="${author.getId()}" name="authorId"
-    th:text="${author.getName()} + ' ' + ${author.getSurname()}">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Select author:</th>
+        </tr>
+        </thead>
 
-  </div>
-  <br/>
+        <tbody>
+        <tr th:each="author: ${authors}" class="author">
+            <td th:text="${author.getName()}"></td>
+            <td th:text="${author.getSurname()}"></td>
+            <td>
+                <th:block>
+                    <form th:action="@{'/authors/'+${bookId}+'/{id}' (id=${author.getId()})}"
+                          th:method="POST">
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="fa fa-trash">
+                                Add author
+                            </i>
+                        </button>
+                    </form>
+                </th:block>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-  <input type='submit' value='Add author'>
 
 </section>
 <aside>
-  <table>
-    <tr>
-      <!-- change to show selected book isbn -->
-      <td><b>Book Isbn</b></td>
-      <td th:text="${isbn}" th:value="${isbn}"></td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <!-- change to show selected book isbn -->
+            <td><b>Book Isbn</b></td>
+            <td th:text="${isbn}" th:value="${isbn}"></td>
+        </tr>
+    </table>
 </aside>
-</form>
 
 </body>
 </html>

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mk.finki.ukim.mk.lab.model.Book;
 import mk.finki.ukim.mk.lab.service.BookService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -45,5 +46,11 @@ public class BookListServlet extends HttpServlet {
         req.getSession().removeAttribute("isbn");
         req.getSession().setAttribute("isbn", isbn);
         resp.sendRedirect("/author");
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        bookService.deleteAuthorsForBook(req.getParameter("isbn"));
+        resp.sendRedirect("/bookDetails");
     }
 }
