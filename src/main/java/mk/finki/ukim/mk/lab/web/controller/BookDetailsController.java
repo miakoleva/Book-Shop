@@ -18,10 +18,10 @@ public class BookDetailsController {
         this.bookService = bookService;
     }
 
-    @GetMapping
+    @GetMapping()
     public String getDetails(@RequestParam String bookId, Model model){
-        Optional<Book> book = bookService.findBookById(Long.valueOf(bookId));
-       model.addAttribute("book", book);
+        Book book = bookService.findBookById(Long.valueOf(bookId)).get();
+        model.addAttribute("book", book);
         return "bookDetails";
     }
 
