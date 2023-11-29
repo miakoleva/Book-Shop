@@ -74,4 +74,14 @@ public class BookController {
         this.bookService.save(id, title, isbn, genre, year, bookStores);
         return "redirect:/books";
     }
+
+    @PostMapping("clone/{id}")
+    public String cloneBook(@PathVariable Long id){
+        Book original = bookService.findBookById(id).get();
+        this.bookService.save(null,"Copy of " +  original.getTitle(),
+                original.getIsbn(), original.getGenre(),
+                original.getYear(), original.getBookStore().getId());
+
+        return "redirect:/books";
+    }
 }

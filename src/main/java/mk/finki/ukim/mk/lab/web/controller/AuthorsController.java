@@ -26,7 +26,7 @@ public class AuthorsController {
     @GetMapping
     public String getPage(@RequestParam String bookId, Model model){
         Optional<Book> book = this.bookService.findBookById(Long.valueOf(bookId));
-        List<Author> existingAuthors = this.bookService.findBookByIsbn(book.get().getIsbn()).getAuthors();
+        List<Author> existingAuthors = this.bookService.findBookById(Long.valueOf(bookId)).get().getAuthors();
         List<Author> additionalAuthors = this.authorService.filterExistingAuthors(existingAuthors);
         model.addAttribute("authors", additionalAuthors);
         model.addAttribute("bookId", bookId);
@@ -38,7 +38,7 @@ public class AuthorsController {
     public String addAuthorToBook(@PathVariable Long bookId,@PathVariable Long id){
 
        Optional<Book> book = bookService.findBookById(bookId);
-        this.bookService.addAuthorToBook(id, book.get().getIsbn());
+        this.bookService.addAuthorToBook(id, book.get().getId());
 
         return "redirect:/book-details?bookId=" + bookId;
 
