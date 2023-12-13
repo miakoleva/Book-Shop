@@ -1,7 +1,7 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.BookStore;
-import mk.finki.ukim.mk.lab.repository.BookStoreRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.BookStoreRepository;
 import mk.finki.ukim.mk.lab.service.BookStoreService;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,6 @@ public class BookStoreServiceImpl implements BookStoreService {
 
     @Override
     public BookStore findById(Long id) {
-        return bookStoreRepository.findById(id);
+        return bookStoreRepository.findById(id).get();
     }
 }

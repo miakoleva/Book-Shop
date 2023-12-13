@@ -3,12 +3,13 @@ package mk.finki.ukim.mk.lab.service.impl;
 import mk.finki.ukim.mk.lab.model.Author;
 import mk.finki.ukim.mk.lab.model.Book;
 import mk.finki.ukim.mk.lab.model.BookStore;
-import mk.finki.ukim.mk.lab.repository.AuthorRepository;
-import mk.finki.ukim.mk.lab.repository.BookRepository;
-import mk.finki.ukim.mk.lab.repository.BookStoreRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.AuthorRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.BookRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.BookStoreRepository;
 import mk.finki.ukim.mk.lab.service.BookService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,17 +35,19 @@ public class BookServiceImpl implements BookService {
     public Author addAuthorToBook(Long authorId, Long bookId) {
         Author author = authorRepository.findById(authorId).get();
         Book book = bookRepository.findById(bookId).get();
-        return bookRepository.addAuthorToBook(author, book);
+        book.getAuthors().add(author);
+        bookRepository.save(book);
+        return author;
     }
 
     @Override
     public Book findBookByIsbn(String isbn) {
-        return bookRepository.findByIsbn(isbn);
+        return bookRepository.findByIsbn(isbn).get();
     }
 
     @Override
     public Book deleteAuthorsForBook(String isbn) {
-        Book book = bookRepository.findByIsbn(isbn);
+        Book book = bookRepository.findByIsbn(isbn).get();
         book.getAuthors().clear();
         return book;
     }
@@ -55,14 +58,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Long id) {
-        bookRepository.deleteBook(id);
+    public void deleteById(Long id) {
+        this.bookRepository.deleteBookById(id);
     }
 
     @Override
     public Optional<Book> save(Long id, String title, String isbn, String genre, int year, Long bookStore) {
-        BookStore bookStore1 = this.bookStoreRepository.findById(bookStore);
-        return this.bookRepository.save(id, title, isbn, genre, year, bookStore1);
+        BookStore bookStore1 = this.bookStoreRepository.findById(bookStore).get();
+        Book book = new Book(isbn, title,genre, year, new ArrayList<>(), bookStore1);
+        return Optional.of(this.bookRepository.save(book));
     }
 
 

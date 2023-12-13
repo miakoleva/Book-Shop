@@ -64,6 +64,13 @@
                         </button>
                     </form>
                 </th:block>
+                <th:block>
+                    <form th:action="@{'reviews/add-review/{id}' (id=${book.getId()})}">
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="fa fa-trash">Add review</i>
+                        </button>
+                    </form>
+                </th:block>
             </td>
         </tr>
         </tbody>

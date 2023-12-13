@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <title>Welcome to the review page</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-striped">
+                <thead></thead>
+                <tbody>
+
+                <th:block>
+            <form action="/reviews/submit-review" method="POST">
+                <input id="id" type="hidden" name="id"
+                       th:value="${bookId}">
+
+                <div class="form-group">
+                    <label for="review">Book Rating</label>
+                    <input type="number"
+                           class="form-control"
+                           id="review"
+                           name="review"
+                           placeholder="Enter book title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text"
+                           class="form-control"
+                           id="description"
+                           name="description"
+                           placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <label for="dateCreated">Book Date Created</label>
+                    <input type="datetime-local"
+                           class="form-control"
+                           id="dateCreated"
+                           name="dateCreated"
+                           placeholder="Enter book review date of creation">
+                </div>
+
+
+                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+                </th:block>
+
+                <th:block>
+                    <form action="/reviews/between-dates">
+                        <input id="idForDate" type="hidden" name="idForDate"
+                               th:value="${bookId}">
+                        <div class="form-group">
+                            <label for="dateCreatedAfter">Book Date Created After</label>
+                            <input type="datetime-local"
+                                   class="form-control"
+                                   id="dateCreatedAfter"
+                                   name="dateCreatedAfter">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateCreatedBefore">Book Date Created Before</label>
+                            <input type="datetime-local"
+                                   class="form-control"
+                                   id="dateCreatedBefore"
+                                   name="dateCreatedBefore">
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="fa fa-trash">See ratings</i>
+                        </button>
+                    </form>
+                </th:block>
+
+                </tbody>
+
+            </table>
+            <a type="button" class="btn btn-primary" href="/books">Back</a>
+        </div>
+    </div>
+</div>
+</div>

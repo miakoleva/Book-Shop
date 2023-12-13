@@ -27,6 +27,21 @@
         <li th:text="${author.getName()} + ' ' + ${author.getSurname()}"></li>
 
     </ul>
+    input type="datetime-local" from
+    input type="datetime-local" to
+<!--    <h2 th:text="${siteReviews}"></h2>-->
+
+    <h2>RATINGS:</h2>
+    <ul th:each="rating: ${reviews}">
+        <li th:text="${rating.toString()}">
+
+        </li>
+    </ul>
+
+    <h2>AVERAGE RATING:</h2>
+    <h2 th:text="${rating}"></h2>
+
+
 </section>
 <a type="button" class="btn btn-primary" href="/books">Back</a>
 

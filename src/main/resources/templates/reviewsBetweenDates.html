@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+
+  <title>Books Homepage - Welcome to My Book Store</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+<h2>Reviews between dates</h2>
+<h2 th:text="${dateAfter}"></h2>
+<h2 th:text="${dateBefore}"></h2>
+<h2 th:text="${bookName}"></h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Book Ratings</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Прикажување на рецензиите -->
+  <tr th:each="review : ${reviews}">
+    <td th:text="${review.getScore()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

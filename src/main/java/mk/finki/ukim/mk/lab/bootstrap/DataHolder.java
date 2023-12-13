@@ -4,8 +4,10 @@ import jakarta.annotation.PostConstruct;
 import mk.finki.ukim.mk.lab.model.Author;
 import mk.finki.ukim.mk.lab.model.Book;
 import mk.finki.ukim.mk.lab.model.BookStore;
+import mk.finki.ukim.mk.lab.model.Review;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +18,20 @@ public class DataHolder {
     public static List<Book> books = null;
 
     public static List<BookStore> bookStores = null;
+    public static List<Review> reviews = null;
 
     @PostConstruct
     public void init() {
         authors = new ArrayList<>();
         books = new ArrayList<>();
         bookStores = new ArrayList<>();
+        reviews = new ArrayList<>();
 
-        Author author1 = new Author(1L, "Mia", "Koleva", "mk");
-        Author author2 = new Author(2L, "Oliver", "Aleksovski", "oa");
-        Author author3 = new Author(3L, "Simona", "Koleva", "sk");
-        Author author4 = new Author(4L, "Mila", "Mihajlova", "mm");
-        Author author5 = new Author(5L, "Nikola", "Spasic", "ns");
+        Author author1 = new Author("Mia", "Koleva", "mk", LocalDate.of(2002,12,3));
+        Author author2 = new Author( "Oliver", "Aleksovski", "oa", LocalDate.of(2000,10,25));
+        Author author3 = new Author("Simona", "Koleva", "sk", LocalDate.of(1995,9,24));
+        Author author4 = new Author( "Mila", "Mihajlova", "mm", LocalDate.of(1998,11,15));
+        Author author5 = new Author( "Nikola", "Spasic", "ns", LocalDate.of(1975, 5, 5));
 
 
         authors.add(author1);
