@@ -4,7 +4,6 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import mk.finki.ukim.mk.lab.model.Author;
 import mk.finki.ukim.mk.lab.model.AuthorFullname;
-import org.junit.jupiter.api.Test;
 
 
 @Converter

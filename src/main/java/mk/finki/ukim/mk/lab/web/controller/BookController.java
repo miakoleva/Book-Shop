@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
+import mk.finki.ukim.mk.lab.model.Author;
 import mk.finki.ukim.mk.lab.model.Book;
 import mk.finki.ukim.mk.lab.model.BookStore;
 import mk.finki.ukim.mk.lab.service.BookService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +46,7 @@ public class BookController {
 
     @PostMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id){
-        this.bookService.deleteById(id);
+        this.bookService.deleteBookById(id);
         return "redirect:/books";
     }
 
@@ -71,7 +73,7 @@ public class BookController {
                           @RequestParam String genre,
                           @RequestParam int year,
                           @RequestParam Long bookStores){
-        this.bookService.save(id, title, isbn, genre, year, bookStores);
+        this.bookService.save(id, title, isbn, genre, year, new ArrayList<>(), bookStores);
         return "redirect:/books";
     }
 
@@ -80,8 +82,10 @@ public class BookController {
         Book original = bookService.findBookById(id).get();
         this.bookService.save(null,"Copy of " +  original.getTitle(),
                 original.getIsbn(), original.getGenre(),
-                original.getYear(), original.getBookStore().getId());
+                original.getYear(), original.getAuthors(), original.getBookStore().getId());
 
         return "redirect:/books";
     }
+
+
 }

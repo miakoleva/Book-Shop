@@ -34,7 +34,7 @@
                            class="form-control"
                            id="review"
                            name="review"
-                           placeholder="Enter book title">
+                           placeholder="Enter book rating">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -57,31 +57,6 @@
                 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
             </form>
-                </th:block>
-
-                <th:block>
-                    <form action="/reviews/between-dates">
-                        <input id="idForDate" type="hidden" name="idForDate"
-                               th:value="${bookId}">
-                        <div class="form-group">
-                            <label for="dateCreatedAfter">Book Date Created After</label>
-                            <input type="datetime-local"
-                                   class="form-control"
-                                   id="dateCreatedAfter"
-                                   name="dateCreatedAfter">
-                        </div>
-                        <div class="form-group">
-                            <label for="dateCreatedBefore">Book Date Created Before</label>
-                            <input type="datetime-local"
-                                   class="form-control"
-                                   id="dateCreatedBefore"
-                                   name="dateCreatedBefore">
-                        </div>
-
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            <i class="fa fa-trash">See ratings</i>
-                        </button>
-                    </form>
                 </th:block>
 
                 </tbody>

@@ -15,4 +15,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllByBook(Book book);
     List<Review> findAllByTimestampAfterAndTimestampBefore(LocalDateTime date1, LocalDateTime date2);
     List<Review> findAllByBookAndTimestampAfterAndTimestampBefore(Book book, LocalDateTime date1, LocalDateTime date2);
+
 }

@@ -52,6 +52,7 @@ public class ReviewController {
         model.addAttribute("dateAfter", dateCreatedAfter);
         model.addAttribute("dateBefore", dateCreatedBefore);
         model.addAttribute("bookName", book.getTitle());
+        model.addAttribute("bookId", book.getId());
         return "reviewsBetweenDates";
     }
 
