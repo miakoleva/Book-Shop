@@ -62,6 +62,18 @@
                 </tbody>
 
             </table>
+
+
+            <th:block>
+                <h2>Average ratings for all books</h2>
+                <h3 th:text="${avg}"></h3>
+            </th:block>
+            <th:block>
+                <h2>Max Avg Rating For All Books</h2>
+                <h3 th:text="${max}"></h3>
+            </th:block>
+
+
             <a type="button" class="btn btn-primary" href="/books">Back</a>
         </div>
     </div>

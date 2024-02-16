@@ -18,4 +18,8 @@ public interface ReviewService {
     List<LocalDateTime> dateTimes(Book book);
     List<Review> getAllReviewsBetweenDates(Book book, LocalDateTime date1, LocalDateTime date2);
 
+    Double getAvgRatingForAllBooks();
+
+    Double getMaxScoreForAllBooks();
+
 }

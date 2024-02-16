@@ -8,6 +8,8 @@ import mk.finki.ukim.mk.lab.service.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +60,25 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getAllReviewsBetweenDates(Book book, LocalDateTime date1, LocalDateTime date2) {
         return reviewRepository.findAllByBookAndTimestampAfterAndTimestampBefore(book, date1, date2);
+    }
+
+    @Override
+    public Double getAvgRatingForAllBooks() {
+        return this.reviewRepository.findAll().stream()
+                .mapToDouble(review -> review.getScore())
+                .average().orElse(0.0);
+    }
+
+    @Override
+    public Double getMaxScoreForAllBooks() {
+        List<Book> allBooks = bookRepository.findAll();
+        List<Long> allBookIds = allBooks.stream().map(b -> b.getId()).collect(Collectors.toList());
+
+        List<Double> allReviewsAvg = allBooks.stream().map(b -> getAvgRatingForBook(b))
+                .collect(Collectors.toList());
+
+        return allReviewsAvg.stream().map(r -> r.doubleValue()).max(Comparator.naturalOrder())
+                .orElse(0.0);
     }
 
 

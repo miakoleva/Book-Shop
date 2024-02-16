@@ -56,6 +56,23 @@ public class ReviewController {
         return "reviewsBetweenDates";
     }
 
+    @GetMapping("/avg-ratings")
+    public String getAvgRatings(Model model){
+        Double avg = this.reviewService.getAvgRatingForAllBooks();
+        model.addAttribute("avg", avg);
+        return "review";
+    }
+
+    @GetMapping("/max-avg")
+    public String getMaxRating(Model model){
+        Double max = this.reviewService.getMaxScoreForAllBooks();
+        model.addAttribute("max", max);
+        return "review";
+    }
+
+
+
+
 
 
 

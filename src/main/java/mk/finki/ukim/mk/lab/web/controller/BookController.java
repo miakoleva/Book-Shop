@@ -5,6 +5,8 @@ import mk.finki.ukim.mk.lab.model.Book;
 import mk.finki.ukim.mk.lab.model.BookStore;
 import mk.finki.ukim.mk.lab.service.BookService;
 import mk.finki.ukim.mk.lab.service.BookStoreService;
+import mk.finki.ukim.mk.lab.service.ReviewService;
+import mk.finki.ukim.mk.lab.service.ShoppingCartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,16 @@ import java.util.Optional;
 @RequestMapping("/books")
 public class BookController {
 
-    private BookService bookService;
-    private BookStoreService bookStoreService;
+    private final BookService bookService;
+    private final BookStoreService bookStoreService;
+
+
 
     public BookController(BookService bookService, BookStoreService bookStoreService) {
         this.bookService = bookService;
         this.bookStoreService = bookStoreService;
+
+
     }
 
 
@@ -34,8 +40,8 @@ public class BookController {
         }
         List<Book> books = this.bookService.listBooks();
         model.addAttribute("books", books);
-        return "listBooks";
-
+        model.addAttribute("bodyContent", "listBooks");
+        return "master-template";
     }
 
     @PostMapping("{id}")
@@ -57,12 +63,14 @@ public class BookController {
        model.addAttribute("book", book);
        model.addAttribute("bookStores", bookStores);
        return "add-book";
+
     }
 
     @GetMapping("/add-book")
     public String editBook(Model model){
         List<BookStore> bookStores = this.bookStoreService.findAll();
         model.addAttribute("bookStores", bookStores);
+        //model.addAttribute("bodyContent", "add-book");
         return "add-book";
     }
 
@@ -86,6 +94,8 @@ public class BookController {
 
         return "redirect:/books";
     }
+
+
 
 
 }
